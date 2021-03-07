@@ -1,0 +1,113 @@
+#N canvas 709 159 818 807 12;
+#X obj 333 46 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 347 74 samplerate~;
+#X obj 347 98 / 64;
+#X obj 347 122 osc~;
+#X obj 347 146 *~ -0.5;
+#X obj 347 170 +~ 0.5;
+#X msg 446 74 0;
+#X obj 335 198 tabwrite~ hanning;
+#X obj 333 22 loadbang;
+#X floatatom 222 14 5 0 0 0 - - -;
+#X obj 222 40 s squish;
+#X obj 15 65 *~;
+#X obj 33 40 tabreceive~ hanning;
+#X obj 15 89 rfft~;
+#X obj 84 126 *~;
+#X obj 117 126 *~;
+#X obj 84 150 +~;
+#X obj 84 205 q8_rsqrt~;
+#X obj 84 280 clip~;
+#X obj 116 233 r squish;
+#X obj 116 257 expr 0.01*$f1*$f1;
+#X obj 15 344 *~;
+#X obj 47 344 *~;
+#X text 149 150 Calculate amplitude;
+#X text 253 260 Calculate threshold of squish;
+#X text 80 346 Multiply the clipped amplitude with the original;
+#X obj 15 390 rifft~;
+#X obj 15 446 *~;
+#X obj 33 418 tabreceive~ hanning;
+#X obj 15 498 outlet~;
+#X obj 15 14 inlet~;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array hanning 100 float 5;
+#A 0 0 0.00240764 0.00960734 0.0215298 0.0380601 0.0590392 0.0842649
+0.113494 0.146446 0.182803 0.222214 0.264301 0.308658 0.354857 0.402455
+0.450991 0.5 0.549009 0.597545 0.645143 0.691342 0.735699 0.777786
+0.817197 0.853554 0.886506 0.915736 0.940961 0.96194 0.978471 0.990393
+0.997593 1 0.997592 0.990392 0.978469 0.961939 0.940959 0.915733 0.886503
+0.853551 0.817194 0.777782 0.735695 0.691338 0.645139 0.597541 0.549004
+0.499996 0.450987 0.40245 0.354853 0.308654 0.264297 0.222211 0.182799
+0.146443 0.113491 0.084262 0.0590366 0.038058 0.0215281 0.00960615
+0.00240701 0 0.00240764 0.00960734 0.0215298 0.0380601 0.0590392 0.0842649
+0.113494 0.146446 0.182803 0.222214 0.264301 0.308658 0.354857 0.402455
+0.450991 0.5 0.549009 0.597545 0.645143 0.691342 0.735699 0.777786
+0.817197 0.853554 0.886506 0.915736 0.940961 0.96194 0.978471 0.990393
+0.997593 1 0.997592 0.990392 0.978469;
+#X coords 0 1 63 0 200 140 1 0 0;
+#X restore 530 121 graph;
+#X obj 84 174 +~ 1e-20;
+#X floatatom 184 112 5 0 0 0 - - -;
+#X obj 184 89 env~;
+#X obj 16 473 +~ 0.1;
+#X obj 84 304 *~ 0.00065;
+#X obj 481 443 *~;
+#X obj 499 418 tabreceive~ hanning;
+#X obj 481 467 rfft~;
+#X obj 481 493 *~;
+#X obj 514 493 *~;
+#X obj 481 517 +~;
+#X obj 481 541 q8_rsqrt~;
+#X obj 481 392 inlet~;
+#X obj 516 313 clip~;
+#X obj 516 337 *~ 0.00065;
+#X connect 0 0 6 0;
+#X connect 0 0 1 0;
+#X connect 0 0 7 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 5 0 7 0;
+#X connect 6 0 3 1;
+#X connect 8 0 0 0;
+#X connect 9 0 10 0;
+#X connect 11 0 13 0;
+#X connect 12 0 11 1;
+#X connect 12 0 34 0;
+#X connect 13 0 14 0;
+#X connect 13 0 14 1;
+#X connect 13 0 21 0;
+#X connect 13 1 15 0;
+#X connect 13 1 15 1;
+#X connect 13 1 22 0;
+#X connect 14 0 16 0;
+#X connect 15 0 16 1;
+#X connect 16 0 32 0;
+#X connect 17 0 18 0;
+#X connect 18 0 36 0;
+#X connect 19 0 20 0;
+#X connect 20 0 18 2;
+#X connect 21 0 26 0;
+#X connect 26 0 27 0;
+#X connect 27 0 35 0;
+#X connect 28 0 27 1;
+#X connect 30 0 11 0;
+#X connect 32 0 17 0;
+#X connect 34 0 33 0;
+#X connect 35 0 29 0;
+#X connect 36 0 21 1;
+#X connect 36 0 22 1;
+#X connect 37 0 39 0;
+#X connect 38 0 37 1;
+#X connect 39 0 40 0;
+#X connect 39 0 40 1;
+#X connect 39 1 41 0;
+#X connect 39 1 41 1;
+#X connect 40 0 42 0;
+#X connect 41 0 42 1;
+#X connect 42 0 43 0;
+#X connect 44 0 37 0;
+#X connect 45 0 46 0;

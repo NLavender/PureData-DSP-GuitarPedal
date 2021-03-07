@@ -1,0 +1,125 @@
+#N canvas 95 108 729 849 12;
+#X obj 34 667 dac~;
+#X obj 96 186 *~;
+#X obj 201 40 tgl 40 0 empty empty empty 17 7 0 10 -4160 -262144 -262144
+1 1;
+#X obj 232 330 vu 15 120 empty empty -1 -8 0 10 -66577 -1 1 0;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array InputMonitor 100 float 5;
+#A 0 -2.99172e-05 -3.3747e-05 8.91381e-06 3.94153e-06 -2.80333e-05
+-1.25042e-05 -5.68319e-06 -2.45665e-05 -2.20177e-05 -2.935e-06 6.37468e-07
+1.0975e-05 1.20744e-05 1.9723e-07 -1.28502e-05 -9.91835e-07 2.09926e-05
+-8.91118e-06 2.01898e-05 -4.82389e-06 -2.56022e-05 3.87564e-05 1.20448e-05
+-2.51845e-05 3.9856e-06 -3.69249e-06 -1.36916e-05 1.01632e-05 -2.2098e-05
+-6.84974e-06 -3.48357e-06 -8.37926e-06 -2.04908e-05 -3.12851e-05 2.12159e-05
+-5.69911e-06 3.25448e-07 4.4672e-06 -1.09465e-05 -6.91989e-06 -2.35812e-05
+-5.59197e-07 2.2012e-05 4.46209e-06 -1.1694e-05 -1.07377e-05 -3.95241e-05
+-1.61805e-05 -2.38704e-05 -3.6151e-05 -9.1676e-06 -6.45264e-06 1.66291e-05
+-3.00624e-06 1.8124e-05 2.23541e-05 -5.01666e-06 1.62669e-06 -1.36417e-05
+-2.28684e-06 1.64105e-05 1.05117e-05 3.17005e-05 4.72102e-05 2.23496e-05
+5.50734e-06 8.74714e-06 2.80237e-05 1.00328e-05 1.06559e-06 -1.19092e-05
+-3.80295e-05 -4.67874e-05 -4.39141e-05 -2.5066e-06 -6.58314e-06 -1.10799e-05
+-2.25485e-05 -2.73027e-05 -9.55504e-06 1.51977e-06 1.33496e-05 -3.52454e-05
+1.16783e-07 4.57382e-05 -1.89848e-05 -2.52028e-06 -3.29046e-07 -6.29682e-05
+-3.35702e-05 9.46787e-07 5.55754e-06 8.95108e-06 1.10321e-05 -1.66956e-05
+-4.95016e-05 1.4366e-05 4.7491e-05 -1.31318e-05 -1.39136e-05;
+#X coords 0 1 100 -1 200 140 1;
+#X restore 582 77 graph;
+#X obj 175 179 metro 10;
+#X obj 175 160 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 231 261 +~;
+#X obj 231 283 env~;
+#X obj 231 305 - 100;
+#X text 121 24 Toggle Sound;
+#X obj 96 549 DelayMod;
+#X obj 165 687 vu 15 120 empty empty -1 -8 0 10 -66577 -1 1 0;
+#X obj 164 618 +~;
+#X obj 164 640 env~;
+#X obj 164 662 - 100;
+#X obj 175 203 tabwrite~ InputMonitor;
+#X obj 96 145 *~;
+#X obj 96 515 ReverbMod;
+#X obj 477 111 loadbang;
+#X msg 477 136 \; pd dsp 1;
+#X obj 34 94 adc~ 2;
+#X obj 110 280 fiddle~;
+#X floatatom 140 304 5 0 0 0 - - -;
+#X obj 140 326 mtof;
+#X floatatom 140 349 5 0 0 0 - - -;
+#X floatatom 184 304 5 0 0 0 - - -;
+#X obj 175 137 loadbang;
+#X obj 96 479 TremMod;
+#X obj 477 204 s startValues;
+#X obj 477 177 loadbang;
+#X obj 96 420 CompressorMod5;
+#X obj 96 393 EQMod;
+#X obj 360 480 SlidersMIDI;
+#X obj 96 448 DistortionMod2;
+#X obj 34 203 *~;
+#X floatatom 260 62 5 0 0 0 - - -;
+#X obj 52 179 == 0;
+#X obj 327 108 r InputGain;
+#X obj 560 368 r DelayOnOff;
+#X obj 560 393 tgl 15 0 empty empty empty 17 7 0 10 -204786 -1 -1 0
+1;
+#X obj 560 437 tgl 15 0 empty empty empty 17 7 0 10 -260097 -1 -1 0
+1;
+#X obj 560 412 r ReverbOnOff;
+#X obj 560 481 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
+1;
+#X obj 560 456 r TremOnOff;
+#X obj 561 524 tgl 15 0 empty empty empty 17 7 0 10 -159808 -1 -1 0
+1;
+#X obj 561 499 r CompressionOnOff;
+#X obj 562 568 tgl 15 0 empty empty empty 17 7 0 10 -4034 -1 -1 0 1
+;
+#X obj 562 543 r DistortionOnOff;
+#X obj 201 14 r PatchOnOff;
+#X obj 197 90 > 0;
+#X floatatom 259 98 5 0 0 0 - - -;
+#X connect 1 0 7 0;
+#X connect 1 0 16 0;
+#X connect 1 0 22 0;
+#X connect 1 0 32 0;
+#X connect 2 0 36 0;
+#X connect 2 0 50 0;
+#X connect 5 0 16 0;
+#X connect 6 0 5 0;
+#X connect 7 0 8 0;
+#X connect 8 0 9 0;
+#X connect 9 0 3 0;
+#X connect 11 0 0 0;
+#X connect 11 0 0 1;
+#X connect 11 0 13 0;
+#X connect 13 0 14 0;
+#X connect 14 0 15 0;
+#X connect 15 0 12 0;
+#X connect 17 0 1 0;
+#X connect 18 0 11 0;
+#X connect 19 0 20 0;
+#X connect 21 0 17 0;
+#X connect 21 0 35 0;
+#X connect 22 2 23 0;
+#X connect 22 3 26 0;
+#X connect 23 0 24 0;
+#X connect 24 0 25 0;
+#X connect 27 0 6 0;
+#X connect 28 0 18 0;
+#X connect 30 0 29 0;
+#X connect 31 0 34 0;
+#X connect 32 0 31 0;
+#X connect 34 0 28 0;
+#X connect 35 0 0 0;
+#X connect 35 0 0 1;
+#X connect 37 0 35 1;
+#X connect 38 0 17 1;
+#X connect 39 0 40 0;
+#X connect 42 0 41 0;
+#X connect 44 0 43 0;
+#X connect 46 0 45 0;
+#X connect 48 0 47 0;
+#X connect 49 0 2 0;
+#X connect 50 0 1 1;
+#X connect 50 0 37 0;
+#X connect 50 0 51 0;
